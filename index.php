@@ -85,8 +85,13 @@ if ($_POST["change_mode"] == "1") {
 <div class="rounded-bottom">
 
     &nbsp;version <?=$mod_version?><br>
-    <? 
-    if (file_exists("includes/beef-master/beef")) { 
+    <?
+	if ($mod_beef_kali == "1") {
+		$check_beef = "/usr/bin/beef-xss";
+	} else {
+		$check_beef = "includes/beef-master/beef";
+	}
+    if (file_exists($check_beef)) { 
         echo "&nbsp;&nbsp;&nbsp; $mod_alias <font style='color:lime'>installed</font><br>";
     } else {
 		echo "&nbsp;&nbsp;&nbsp; $mod_alias <span style='color:red'>install</span><br>";

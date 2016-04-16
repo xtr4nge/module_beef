@@ -20,6 +20,8 @@ Amid growing concerns about web-borne attacks against clients, including mobile 
 <br>chmod 755 install.sh
 <br>./install.sh
 </font>
-
+<br><br>
+<b>Note</b>: If you use the installation script (install.sh) on Kali Linux or NetHunter, it will install a newest version but it will break BeEF as a service (native version).
+So, after using the script, you need to disable "Kali-Linux | NetHunter" on the option tab.
 <br>
 
