@@ -44,10 +44,12 @@ if($service != "") {
 		exec_fruitywifi($exec);
 		
 		if ($mod_beef_kali == "1") {
-			$exec = "/etc/init.d/beef-xss restart";
+			//$exec = "/etc/init.d/beef-xss restart";
+			//exec_fruitywifi($exec);
+			$exec = "./beef-kali";
 			exec_fruitywifi($exec);
 		} else {
-			$exec = "/usr/bin/ruby -C beef-master/ beef > /tmp/beef.log &";
+			//$exec = "/usr/bin/ruby -C beef-master/ beef > /tmp/beef.log &";
 			$exec = "./beef";
 			exec_fruitywifi($exec);
 			//exec_fruitywifi_env($exec);
@@ -74,11 +76,6 @@ if($service != "") {
 		exec_fruitywifi($exec);
 		
 		unset($output);
-		
-		if ($mod_beef_kali == "1") {
-			$exec = "/etc/init.d/beef-xss stop";
-			exec_fruitywifi($exec);
-		}
 		
 		$exec = "ps aux|grep -iEe 'ruby.+beef' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
