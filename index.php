@@ -117,7 +117,7 @@ if ($_POST["change_mode"] == "1") {
     ?>
 	
 	<?
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI <a href='http://127.0.0.1:3000/ui/panel' target='_blank'>Panel Login</a>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI <a href='http://".$_SERVER['SERVER_ADDR'].":3000/ui/panel' target='_blank'>Panel Login</a>";
     ?>
 	
 	
