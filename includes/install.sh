@@ -12,7 +12,7 @@ wget https://github.com/beefproject/beef/archive/master.zip -O beef-master.zip
 
 unzip beef-master.zip
 cd beef-master
-./install
+./install -y 
 
 #echo
 #echo "installing dependencies..."
