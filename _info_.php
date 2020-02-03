@@ -11,7 +11,7 @@ $mod_isup="ps aux | grep -iEe 'ruby.+beef' | grep -v grep";
 
 # OPTIONS
 $mod_beef_kali="0";
-$mod_beef_auto="1";
+$mod_beef_auto="0";
 
 # EXEC
 $bin_sudo = "/usr/bin/sudo";
