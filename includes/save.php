@@ -42,8 +42,10 @@ if ($regex == 1) {
 }
 
 	$type = $_POST['type'];
+
 	$mod_beef_conf1 = $_POST['mod_beef_conf1'];
 	$mod_beef_conf2	 = $_POST['mod_beef_conf2'];
+
 	$mod_beef_msf = $_POST['mod_beef_msf'];
 	$mod_beef_msfhost = $_POST['mod_beef_msfhost'];
 	$mod_beef_msfport = $_POST['mod_beef_msfport'];
@@ -57,14 +59,67 @@ if ($regex == 1) {
 		
 // Change Settings
 if ($type == "settings") {
-
+	
     $exec = "/bin/sed -i 's/^\\\$meterpreter_host.*/\\\$meterpreter_host = \\\"".$meterpreter_host."\\\";/g' ../_info_.php";
-    //exec("$bin_danger \"" . $exec . "\"", $output); //DEPRECATED
-    $output = exec_fruitywifi($exec);
+$output = exec_fruitywifi($exec);
+	
+    //mod msfrpc
+    $exec = "/bin/sed -i 's/^\\\$mod_beef_msf.*/\\\$mod_beef_msf = \\\"".$mod_beef_msf."\\\";/g' ../_info_.php"; //change main settings
+   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+    
+    //mod msfhost
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+  //  $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+	    
+    //mod msfport
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+    
+    //mod msfuser
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+	    
+    //mod msfpass
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+    
+    //mod msfssl
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+	    
+    //mod msfssltype
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+    
+    //mod msfsslverify
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+	    
+    //mod msfautopwnurl
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
+    
+    //mod msfcallbackhost
+     $exec = "/bin/sed -i 's/ ../_info_.php"; //change main settings
+   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 
-    $exec = "/bin/sed -i 's/^\\\$meterpreter_port.*/\\\$meterpreter_port = \\\"".$meterpreter_port."\\\";/g' ../_info_.php";
+   // $exec = "/bin/sed -i 's/^\\\$meterpreter_host.*/\\\$meterpreter_host = \\\"".$meterpreter_host."\\\";/g' ../_info_.php";
     //exec("$bin_danger \"" . $exec . "\"", $output); //DEPRECATED
-	exec_fruitywifi($exec);
+  //  $output = exec_fruitywifi($exec);
+
+   // $exec = "/bin/sed -i 's/^\\\$meterpreter_port.*/\\\$meterpreter_port = \\\"".$meterpreter_port."\\\";/g' ../_info_.php";
+    //exec("$bin_danger \"" . $exec . "\"", $output); //DEPRECATED
+	// exec_fruitywifi($exec);
     
     header('Location: ../index.php?tab=0');
     exit;
