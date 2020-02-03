@@ -13,7 +13,10 @@ $mod_msfbacktask="ps aux | grep -iEe 'msfrpcd' | grep -v grep"; //msfrpcd check
 # OPTIONS
 $mod_beef_kali="0";
 $mod_beef_auto="0";
+
 #User Options
+$mod_beef_conf1="$mod_path/config.yaml";
+$mod_beef_conf2="$mod_path/extensions/metasploit/config.yaml";
 $mod_beef_msf="0";
 $mod_beef_msfhost="127.0.0.1";
 $mod_beef_msfport="55553";
