@@ -60,8 +60,6 @@ if ($regex == 1) {
 // Change Settings
 if ($type == "settings") {
 	
-    $exec = "/bin/sed -i 's/^\\\$meterpreter_host.*/\\\$meterpreter_host = \\\"".$meterpreter_host."\\\";/g' ../_info_.php";
-$output = exec_fruitywifi($exec);
 	
     //mod msfrpc
     $exec = "/bin/sed -i 's/^\\\$mod_beef_msf.*/\\\$mod_beef_msf = \\\"".$mod_beef_msf."\\\";/g' ../_info_.php"; //change main settings
@@ -126,16 +124,7 @@ $output = exec_fruitywifi($exec);
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfcallbackhost.*/\\\$mod_beef_msfcallbackhost = \\\"".$mod_beef_msfcallbackhost."\\\";/g' ../_info_.php"; //change main settings
      $output = exec_fruitywifi($exec);
 	
-	// $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
-   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 
-   // $exec = "/bin/sed -i 's/^\\\$meterpreter_host.*/\\\$meterpreter_host = \\\"".$meterpreter_host."\\\";/g' ../_info_.php";
-    //exec("$bin_danger \"" . $exec . "\"", $output); //DEPRECATED
-  //  $output = exec_fruitywifi($exec);
-
-   // $exec = "/bin/sed -i 's/^\\\$meterpreter_port.*/\\\$meterpreter_port = \\\"".$meterpreter_port."\\\";/g' ../_info_.php";
-    //exec("$bin_danger \"" . $exec . "\"", $output); //DEPRECATED
-	// exec_fruitywifi($exec);
     
     header('Location: ../index.php?tab=0');
     exit;
