@@ -26,36 +26,36 @@ include "options_config.php";
 
 // Checking POST & GET variables...
 if ($regex == 1) {
-	
-	mod_beef_conf1
-	mod_beef_conf2	
-	mod_beef_msf
-	mod_beef_msfhost
-	mod_beef_msfport
-	mod_beef_msfuser
-	mod_beef_msfpass
-	mod_beef_msfssl
-	mod_beef_msfssltype
-	mod_beef_msfsslverify
-	mod_beef_msfautopwnurl
-	mod_beef_msfcallbackhost
-		
 	regex_standard($_POST['type'], "../../../msg.php", $regex_extra);
-	regex_standard($_POST['action'], "../../../msg.php", $regex_extra);
-	regex_standard($_GET['mod_action'], "../../../msg.php", $regex_extra);
-	regex_standard($_GET['mod_service'], "../../../msg.php", $regex_extra);
-	regex_standard($_GET['meterpreter_host'], "../../../msg.php", $regex_extra);
-	regex_standard($_GET['meterpreter_port'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_conf1'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_conf2'], "../../../msg.php", $regex_extra);	
+	regex_standard($_POST['mod_beef_msf'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfhost'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfport'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfuser'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfpass'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfssl'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfssltype'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfsslverify'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfautopwnurl'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfcallbackhost'], "../../../msg.php", $regex_extra);
 }
 
-$type = $_POST['type'];
-$action = $_POST['action'];
-$mod_action = $_GET['mod_action'];
-$mod_service = $_GET['mod_service'];
-$meterpreter_host = $_POST["meterpreter_host"];
-$meterpreter_port = $_POST["meterpreter_port"];
-
-// meterpreter settings
+	$type = $_POST['type'];
+	$mod_beef_conf1 = $_POST['mod_beef_conf1'];
+	$mod_beef_conf2	 = $_POST['mod_beef_conf2'];
+	$mod_beef_msf = $_POST['mod_beef_msf'];
+	$mod_beef_msfhost = $_POST['mod_beef_msfhost'];
+	$mod_beef_msfport = $_POST['mod_beef_msfport'];
+	$mod_beef_msfuser = $_POST['mod_beef_msfuser'];
+	$mod_beef_msfpass = $_POST['mod_beef_msfpass'];
+	$mod_beef_msfssl = $_POST['mod_beef_msfssl'];
+	$mod_beef_msfssltype = $_POST['mod_beef_msfssltype'];
+	$mod_beef_msfsslverify = $_POST['mod_beef_msfsslverify'];
+	$mod_beef_msfautopwnurl = $_POST['mod_beef_msfautopwnurl'];
+	$mod_beef_msfcallbackhost = $_POST['mod_beef_msfcallbackhost'];
+		
+// Change Settings
 if ($type == "settings") {
 
     $exec = "/bin/sed -i 's/^\\\$meterpreter_host.*/\\\$meterpreter_host = \\\"".$meterpreter_host."\\\";/g' ../_info_.php";
