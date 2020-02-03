@@ -136,6 +136,7 @@ if ($_POST["change_mode"] == "1") {
             <li><a href="#tab-output">Output</a></li>
             <li><a href="#tab-history">History</a></li>
 			<li><a href="#tab-options">Options</a></li>
+			<li><a href="#tab-useroptions">User Options</a></li>
 			<li><a href="#tab-about">About</a></li>
         </ul>
 
@@ -204,7 +205,38 @@ if ($_POST["change_mode"] == "1") {
 			</h5>
 		</div>
 	
-		<!-- END OPTIONS -->
+		<!-- END OPTIONS --> 
+	      
+	      <!-- USER OPTIONS -->
+	    
+	    <div id="tap-useroptions" class="history">
+	    <form method="POST" autocomplete="off" action="includes/save.php">
+                <div class="module-options">
+                    <table>
+                        <tr>
+                            <td>Host: </td>
+                            <td><input name="meterpreter_host" value="<?=$meterpreter_host?>"></td>
+                        </tr>
+                        <tr>
+                            <td>Port: </td>
+                            <td><input name="meterpreter_port" value="<?=$meterpreter_port?>"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="save">
+                                <input name="type" type="hidden" value="settings">
+                            </td>
+                        </tr>
+                    </table>
+		</div> 
+	    </form>
+            
+        </div>
+
+	     <!-- END USER OPTIONS -->
+
+	    
 		
 		<!-- ABOUT -->
 
