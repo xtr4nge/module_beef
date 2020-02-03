@@ -26,6 +26,20 @@ include "options_config.php";
 
 // Checking POST & GET variables...
 if ($regex == 1) {
+	
+	mod_beef_conf1
+	mod_beef_conf2	
+	mod_beef_msf
+	mod_beef_msfhost
+	mod_beef_msfport
+	mod_beef_msfuser
+	mod_beef_msfpass
+	mod_beef_msfssl
+	mod_beef_msfssltype
+	mod_beef_msfsslverify
+	mod_beef_msfautopwnurl
+	mod_beef_msfcallbackhost
+		
 	regex_standard($_POST['type'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['action'], "../../../msg.php", $regex_extra);
 	regex_standard($_GET['mod_action'], "../../../msg.php", $regex_extra);
