@@ -26,7 +26,7 @@ $mod_beef_msfssl="false";
 $mod_beef_msfssltype="TLS1";
 $mod_beef_msfsslverify="false";
 $mod_beef_msfautopwnurl="autopwn";
-$mod_beef_msfcallbackhost:="127.0.0.1";
+$mod_beef_msfcallbackhost="127.0.0.1";
 
 # EXEC
 $bin_sudo = "/usr/bin/sudo";
