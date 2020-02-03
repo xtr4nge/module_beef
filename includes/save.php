@@ -1,6 +1,6 @@
 <? 
 /*
-    Copyright (C) 2013-2014 xtr4nge [_AT_] gmail.com
+    Copyright (C) 2013-2020 xtr4nge [_AT_] gmail.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,7 +59,6 @@ if ($regex == 1) {
 		
 // Change Settings
 if ($type == "settings") {
-	
 	
     //mod msfrpc
     $exec = "/bin/sed -i 's/^\\\$mod_beef_msf.*/\\\$mod_beef_msf = \\\"".$mod_beef_msf."\\\";/g' ../_info_.php"; //change main settings
