@@ -1,6 +1,6 @@
 <? 
 /*
-    Copyright (C) 2013-2016 xtr4nge [_AT_] gmail.com
+    Copyright (C) 2013-2020 xtr4nge [_AT_] gmail.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ include "../../functions.php";
 
 // Checking POST & GET variables...
 if ($regex == 1) {
-	regex_standard($_POST["newdata"], "msg.php", $regex_extra);
+    regex_standard($_POST["newdata"], "msg.php", $regex_extra);
     regex_standard($_GET["logfile"], "msg.php", $regex_extra);
     regex_standard($_GET["action"], "msg.php", $regex_extra);
     regex_standard($_POST["service"], "msg.php", $regex_extra);
@@ -214,12 +214,61 @@ if ($_POST["change_mode"] == "1") {
                 <div class="module-options">
                     <table>
                         <tr>
-                            <td>Host: </td>
-                            <td><input name="meterpreter_host" value="<?=$meterpreter_host?>"></td>
+                            <td>Beef Conf 1: </td>
+                            <td><input name="mod_beef_conf1" value="<?=$mod_beef_conf1?>"></td>
                         </tr>
+			<tr>
+                            <td>Beef Conf 2: </td>
+                            <td><input name="mod_beef_conf2" value="<?=$mod_beef_conf2?>"></td>
+                        </tr>
+			<tr>
+                            <td>Msflink: </td>
+                            <td><input name="mod_beef_msf" value="<?=$mod_beef_msf?>"></td>
+                        </tr> 
+			  <tr>
+                            <td>Msfhost: </td>
+                            <td><input name="mod_beef_msfhost" value="<?=$mod_beef_msfhost?>"></td>
+                        </tr>
+			  <tr>
+                            <td>Msfport: </td>
+                            <td><input name="mod_beef_msfport" value="<?=$mod_beef_msfport?>"></td>
+                        </tr>
+			  <tr>
+                            <td>Msfusert: </td>
+                            <td><input name="mod_beef_msfuser" value="<?=$mod_beef_msfuser?>"></td>
+                        </tr>
+			 <tr>
+                            <td>Msfusert: </td>
+                            <td><input name="mod_beef_msfuser" value="<?=$mod_beef_msfuser?>"></td>
+                        </tr> 
+			  <tr>
+                            <td>Msfrpcpass: </td>
+                            <td><input name="mod_beef_msfpass" value="<?=$mod_beef_msfpass?>"></td>
+                        </tr>
+			 <tr>
+                            <td>Msfrpcssl: </td>
+                            <td><input name="mod_beef_msfssl" value="<?=$mod_beef_msfssl?>"></td>
+                        </tr>
+			 <tr>
+                            <td>Msfrpcssltype: </td>
+                            <td><input name="mod_beef_msfssltype" value="<?=$mod_beef_msfssltype?>"></td>
+                        </tr>
+			 <tr>
+                            <td>Msfrpcssltype: </td>
+                            <td><input name="mod_beef_msfssltype" value="<?=$mod_beef_msfssltype?>"></td>
+                        </tr>
+			    
                         <tr>
-                            <td>Port: </td>
-                            <td><input name="meterpreter_port" value="<?=$meterpreter_port?>"></td>
+                            <td>Msfrpcsslverify: </td>
+                            <td><input name="mod_beef_msfsslverify" value="<?=$mod_beef_msfsslverify?>"></td>
+                        </tr>
+			  <tr>
+                            <td>Msfautopwnurl: </td>
+                            <td><input name="mod_beef_msfautopwnurl" value="<?=$mod_beef_msfautopwnurl?>"></td>
+                        </tr>
+			 <tr>
+                            <td>Msfcallbackhost: </td>
+                            <td><input name="mod_beef_msfcallbackhost" value="<?=$mod_beef_msfcallbackhost?>"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -231,7 +280,6 @@ if ($_POST["change_mode"] == "1") {
                     </table>
 		</div> 
 	    </form>
-            
         </div>
 
 	     <!-- END USER OPTIONS -->
@@ -274,6 +322,10 @@ if ($_POST["change_mode"] == "1") {
     } else if ($_GET["tab"] == 4) {
         echo "<script>";
         echo "$( '#result' ).tabs({ active: 4 });";
+        echo "</script>";
+    } else if ($_GET["tab"] == 5) {
+        echo "<script>";
+        echo "$( '#result' ).tabs({ active: 5 });";
         echo "</script>";
     } 
     ?>
