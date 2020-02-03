@@ -256,8 +256,7 @@ if ($_POST["change_mode"] == "1") {
 			 <tr>
                             <td>Msfrpcssltype: </td>
                             <td><input name="mod_beef_msfssltype" value="<?=$mod_beef_msfssltype?>"></td>
-                        </tr>
-			    
+			</tr>
                         <tr>
                             <td>Msfrpcsslverify: </td>
                             <td><input name="mod_beef_msfsslverify" value="<?=$mod_beef_msfsslverify?>"></td>
@@ -284,8 +283,6 @@ if ($_POST["change_mode"] == "1") {
 
 	     <!-- END USER OPTIONS -->
 
-	    
-		
 		<!-- ABOUT -->
 
         <div id="tab-about" class="history">
