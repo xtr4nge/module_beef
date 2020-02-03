@@ -65,52 +65,68 @@ $output = exec_fruitywifi($exec);
 	
     //mod msfrpc
     $exec = "/bin/sed -i 's/^\\\$mod_beef_msf.*/\\\$mod_beef_msf = \\\"".$mod_beef_msf."\\\";/g' ../_info_.php"; //change main settings
+    $output = exec_fruitywifi($exec);
    // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
     
     //mod msfhost
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfhost.*/\\\$mod_beef_msfhost = \\\"".$mod_beef_msfhost."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+        $output = exec_fruitywifi($exec);
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
   //  $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 	    
     //mod msfport
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfport.*/\\\$mod_beef_msfport = \\\"".$mod_beef_msfport."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+        $output = exec_fruitywifi($exec);
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
     
     //mod msfuser
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfuser.*/\\\$mod_beef_msfuser = \\\"".$mod_beef_msfuser."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 	    
     //mod msfpass
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfpass.*/\\\$mod_beef_msfpass = \\\"".$mod_beef_msfpass."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
     
     //mod msfssl
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfssl.*/\\\$mod_beef_msfssl = \\\"".$mod_beef_msfssl."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 	    
     //mod msfssltype
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfssltype.*/\\\$mod_beef_msfssltype = \\\"".$mod_beef_msfssltype."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
     
     //mod msfsslverify
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfsslverify.*/\\\$mod_beef_msfsslverify = \\\"".$mod_beef_msfsslverify."\\\";/g' ../_info_.php"; //change main settings
-    //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	
+	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 	    
     //mod msfautopwnurl
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfautopwnurl.*/\\\$mod_beef_msfautopwnurl = \\\"".$mod_beef_msfautopwnurl."\\\";/g' ../_info_.php"; //change main settings
-   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	
+	// $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
    // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
     
     //mod msfcallbackhost
      $exec = "/bin/sed -i 's/^\\\$mod_beef_msfcallbackhost.*/\\\$mod_beef_msfcallbackhost = \\\"".$mod_beef_msfcallbackhost."\\\";/g' ../_info_.php"; //change main settings
-   // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
+     $output = exec_fruitywifi($exec);
+	
+	// $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
    // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
 
    // $exec = "/bin/sed -i 's/^\\\$meterpreter_host.*/\\\$meterpreter_host = \\\"".$meterpreter_host."\\\";/g' ../_info_.php";
