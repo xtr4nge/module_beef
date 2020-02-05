@@ -6,7 +6,7 @@ unzip master.zip
 cd beef-master
 echo
 echo "installing beef & Deps..."
-screen -dmS beefinstall ./installbeef.sh
+screen -d -m  ./usr/share/fruitywifi/www/modules/beef/includes/installbeef.sh
 echo "installer running in background"
 echo
 echo "..DONE.."
