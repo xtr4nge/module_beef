@@ -20,7 +20,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>FruityWiFi</title>
+<title>FruityWiFi : BeEF</title>
 <script src="../js/jquery.js"></script>
 <script src="../js/jquery-ui.js"></script>
 
