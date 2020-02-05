@@ -4,6 +4,7 @@ $mod_version="1.3";
 $mod_path="/usr/share/fruitywifi/www/modules/$mod_name";
 $mod_logs="$log_path/$mod_name.log"; 
 $mod_logs_history="$mod_path/includes/logs/";
+$mod_logs_panel="enabled";
 $mod_panel="show";
 $mod_type="module";
 $mod_alias="BeEF";
@@ -17,14 +18,14 @@ $mod_beef_auto="0";
 #User Options
 $mod_beef_conf1="$mod_path/config.yaml";
 $mod_beef_conf2="$mod_path/extensions/metasploit/config.yaml";
-$mod_beef_msf="0";
+$mod_beef_msfenable="0";
 $mod_beef_msfhost="127.0.0.1";
 $mod_beef_msfport="55553";
 $mod_beef_msfuser="msf";
 $mod_beef_msfpass="abc123";
-$mod_beef_msfssl="false";
+$mod_beef_msfsslenable="0";
 $mod_beef_msfssltype="TLS1";
-$mod_beef_msfsslverify="false";
+$mod_beef_msfsslverify="0";
 $mod_beef_msfautopwnurl="autopwn";
 $mod_beef_msfcallbackhost="127.0.0.1";
 
