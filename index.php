@@ -94,7 +94,7 @@ if ($_POST["change_mode"] == "1") {
     if (file_exists($check_beef)) { 
         echo "&nbsp;&nbsp;&nbsp; $mod_alias <font style='color:lime'>installed</font><br>";
     } else {
-	echo "&nbsp;&nbsp;&nbsp; $mod_alias <a href='href='includes/module_action.php?install=install_$mod_name' style='color:red'>install</a><br>";
+	echo "&nbsp;&nbsp;&nbsp; $mod_alias <a href='includes/module_action.php?install=install_$mod_name' style='color:red'>install</a><br>";
     } 
     ?>
     
