@@ -106,8 +106,17 @@ if ($_POST["change_mode"] == "1") {
         echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color='red'><b>disabled</b></font>. | <a href='includes/module_action.php?service=beef&action=start&page=module'><b>start</b></a><br>";
     }
     ?>
+
+    <?
+    $ismoduleup = exec("$mod_msfbacktask");
+    if ($ismoduleup != "") {
+        echo "&nbsp;&nbsp;&nbsp; msfrpc  <font color='lime'><b>enabled</b></font>";
+    } else { 
+        echo "&nbsp;&nbsp;&nbsp; msfrpc  <font color='red'><b>disabled</b></font>";
+    }
+    ?>
 	
-	<?
+    <?
     $ismoduleup = exec("ps aux|grep -E 'mitmdump.+inject_beef' | grep -v grep");
     if ($ismoduleup != "") {
         echo "AutoHook <font color='lime'><b>enabled</b></font>.<br>";
