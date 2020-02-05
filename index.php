@@ -133,17 +133,14 @@ if ($_POST["change_mode"] == "1") {
 
     <div id="result" class="module">
         <ul>
-            <li><a href="#tab-output">Output</a></li>
-            <li><a href="#tab-history">History</a></li>
-			<li><a href="#tab-options">Options</a></li>
-			<li><a href="#tab-useroptions">User Options</a></li>
-			<li><a href="#tab-about">About</a></li>
+             <li><a href="#tab-output">Output</a></li>
+             <li><a href="#tab-history">History</a></li>
+	         <li><a href="#tab-options">Options</a></li>
+	         <li><a href="#tab-useroptions">User Options</a></li>
+             <li><a href="#tab-about">About</a></li>
         </ul>
-
 	<!-- OUTPUT -->
-
         <div id="tab-output">
-			
 			<div>
 				<form id="formLogs-Refresh" name="formLogs-Refresh" method="POST" autocomplete="off" action="index.php">
 					<input type="submit" value="refresh">
@@ -165,11 +162,8 @@ if ($_POST["change_mode"] == "1") {
 					<textarea id="output" class="module-content" style="font-family: courier;"><?=htmlspecialchars($data)?></textarea>
 					<input type="hidden" name="type" value="logs">
 				</form>
-		
 			</div>
-            
-        </div>
-	
+        </div>	
 		<!-- HISTORY -->
 
         <div id="tab-history" class="history">
@@ -209,77 +203,70 @@ if ($_POST["change_mode"] == "1") {
 	      
 	      <!-- USER OPTIONS -->
 	    
-	    <div id="tap-useroptions" class="history">
-	    <form method="POST" autocomplete="off" action="includes/save.php">
-                <div class="module-options">
+	  <div id="tab-useroptions" class="history">
+			<h5>
+			<form method="POST" autocomplete="off" action="includes/save.php">
                     <table>
                         <tr>
                             <td>Beef Conf 1: </td>
                             <td><input name="mod_beef_conf1" value="<?=$mod_beef_conf1?>"></td>
                         </tr>
-			<tr>
+			 	         <tr>
                             <td>Beef Conf 2: </td>
                             <td><input name="mod_beef_conf2" value="<?=$mod_beef_conf2?>"></td>
                         </tr>
-			<tr>
+			             <tr>
                             <td>Msflink: </td>
                             <td><input name="mod_beef_msf" value="<?=$mod_beef_msf?>"></td>
                         </tr> 
-			  <tr>
+			             <tr>
                             <td>Msfhost: </td>
                             <td><input name="mod_beef_msfhost" value="<?=$mod_beef_msfhost?>"></td>
                         </tr>
-			  <tr>
+			             <tr>
                             <td>Msfport: </td>
                             <td><input name="mod_beef_msfport" value="<?=$mod_beef_msfport?>"></td>
                         </tr>
-			  <tr>
+			             <tr>
                             <td>Msfusert: </td>
                             <td><input name="mod_beef_msfuser" value="<?=$mod_beef_msfuser?>"></td>
                         </tr>
-			 <tr>
-                            <td>Msfusert: </td>
-                            <td><input name="mod_beef_msfuser" value="<?=$mod_beef_msfuser?>"></td>
-                        </tr> 
-			  <tr>
+			             <tr>
                             <td>Msfrpcpass: </td>
                             <td><input name="mod_beef_msfpass" value="<?=$mod_beef_msfpass?>"></td>
                         </tr>
-			 <tr>
+			             <tr>
                             <td>Msfrpcssl: </td>
                             <td><input name="mod_beef_msfssl" value="<?=$mod_beef_msfssl?>"></td>
                         </tr>
-			 <tr>
+                        <tr>
                             <td>Msfrpcssltype: </td>
                             <td><input name="mod_beef_msfssltype" value="<?=$mod_beef_msfssltype?>"></td>
                         </tr>
-			 <tr>
-                            <td>Msfrpcssltype: </td>
-                            <td><input name="mod_beef_msfssltype" value="<?=$mod_beef_msfssltype?>"></td>
-			</tr>
                         <tr>
                             <td>Msfrpcsslverify: </td>
                             <td><input name="mod_beef_msfsslverify" value="<?=$mod_beef_msfsslverify?>"></td>
                         </tr>
-			  <tr>
+			             <tr>
                             <td>Msfautopwnurl: </td>
                             <td><input name="mod_beef_msfautopwnurl" value="<?=$mod_beef_msfautopwnurl?>"></td>
                         </tr>
-			 <tr>
+			             <tr>
                             <td>Msfcallbackhost: </td>
                             <td><input name="mod_beef_msfcallbackhost" value="<?=$mod_beef_msfcallbackhost?>"></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
+                                <br>
                                 <input type="submit" value="save">
                                 <input name="type" type="hidden" value="settings">
                             </td>
                         </tr>
-                    </table>
-		</div> 
-	    </form>
-        </div>
+                    </table> 
+	          </form>
+	      </h5>
+	</div>
 
 	     <!-- END USER OPTIONS -->
 
