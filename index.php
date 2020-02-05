@@ -110,9 +110,9 @@ if ($_POST["change_mode"] == "1") {
     <?
     $ismoduleup = exec("$mod_msfbacktask");
     if ($ismoduleup != "") {
-        echo "&nbsp;&nbsp;&nbsp; msfrpc  <font color='lime'><b>enabled</b></font>";
+        echo "&nbsp;&nbsp;&nbsp; msfrpc  <font color='lime'><b>enabled</b></font><br>";
     } else { 
-        echo "&nbsp;&nbsp;&nbsp; msfrpc  <font color='red'><b>disabled</b></font>";
+        echo "&nbsp;&nbsp;&nbsp; msfrpc  <font color='red'><b>disabled</b></font><br>";
     }
     ?>
 	
