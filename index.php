@@ -94,7 +94,7 @@ if ($_POST["change_mode"] == "1") {
     if (file_exists($check_beef)) { 
         echo "&nbsp;&nbsp;&nbsp; $mod_alias <font style='color:lime'>installed</font><br>";
     } else {
-	echo "&nbsp;&nbsp;&nbsp; $mod_alias <a href='includes/module_action.php?service=beef&action=install&page=module' style='color:red'>install</a><br>";
+	echo "&nbsp;&nbsp;&nbsp; $mod_alias <a href='href='includes/module_action.php?install=install_$mod_name' style='color:red'>install</a><br>";
     } 
     ?>
     
@@ -103,7 +103,7 @@ if ($_POST["change_mode"] == "1") {
     if ($ismoduleup != "") {
         echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color='lime'><b>enabled</b></font>.&nbsp; | <a href='includes/module_action.php?service=beef&action=stop&page=module'><b>stop</b></a><br>";
     } else { 
-        echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color='red'><b>disabled</b></font>. | <a href='<a href='includes/module_action.php?install=install_$mod_name'><b>start</b></a><br>";
+        echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color='red'><b>disabled</b></font>. | <a href='includes/module_action.php?service=beef&action=start&page=module'><b>start</b></a><br>";
     }
     ?>
 	
