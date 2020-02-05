@@ -6,7 +6,6 @@ unzip master.zip
 cd beef-master
 echo
 echo "installing beef & Deps..."
-
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -20,6 +19,17 @@ RUBYSUFFIX=''
 command_exists () {
 
   command -v "${1}" >/dev/null 2>&1
+}
+
+
+get_permission () {
+
+  warn 'This script will install BeEF and its required dependencies (including operating system packages).'
+
+  read -rp  "Are you sure you wish to continue (Y/n)? " 
+  if [ "$(echo "${REPLY}" | tr "[:upper:]" "[:lower:]")" = "n" ] ; then
+    fatal 'Installation aborted'
+  fi
 }
 
 
@@ -232,8 +242,6 @@ main () {
   echo "                   -- [ BeEF Installer ] --                      "
   echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
   echo
-
-  get_permission
   check_os
   check_ruby_version
   check_rubygems
@@ -242,11 +250,4 @@ main () {
   finish
 }
 
-cd ../
-echo
-echo "setting permissions..."
-chown -R fruitywifi:fruitywifi beef-master
-
-echo
-echo "..DONE.."
-exit
+main "$@"
