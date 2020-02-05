@@ -29,12 +29,12 @@ if ($regex == 1) {
 	regex_standard($_POST['type'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_conf1'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_conf2'], "../../../msg.php", $regex_extra);	
-	regex_standard($_POST['mod_beef_msf'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfenable'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfhost'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfport'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfuser'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfpass'], "../../../msg.php", $regex_extra);
-	regex_standard($_POST['mod_beef_msfssl'], "../../../msg.php", $regex_extra);
+	regex_standard($_POST['mod_beef_msfsslenable'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfssltype'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfsslverify'], "../../../msg.php", $regex_extra);
 	regex_standard($_POST['mod_beef_msfautopwnurl'], "../../../msg.php", $regex_extra);
@@ -46,12 +46,12 @@ if ($regex == 1) {
 	$mod_beef_conf1 = $_POST['mod_beef_conf1'];
 	$mod_beef_conf2	 = $_POST['mod_beef_conf2'];
 
-	$mod_beef_msf = $_POST['mod_beef_msf'];
+	$mod_beef_msfenable = $_POST['mod_beef_msfenable'];
 	$mod_beef_msfhost = $_POST['mod_beef_msfhost'];
 	$mod_beef_msfport = $_POST['mod_beef_msfport'];
 	$mod_beef_msfuser = $_POST['mod_beef_msfuser'];
 	$mod_beef_msfpass = $_POST['mod_beef_msfpass'];
-	$mod_beef_msfssl = $_POST['mod_beef_msfssl'];
+	$mod_beef_msfssl = $_POST['mod_beef_msfsslenable'];
 	$mod_beef_msfssltype = $_POST['mod_beef_msfssltype'];
 	$mod_beef_msfsslverify = $_POST['mod_beef_msfsslverify'];
 	$mod_beef_msfautopwnurl = $_POST['mod_beef_msfautopwnurl'];
@@ -61,7 +61,7 @@ if ($regex == 1) {
 if ($type == "settings") {
 	
     //mod msfrpc
-    $exec = "/bin/sed -i 's/^\\\$mod_beef_msf.*/\\\$mod_beef_msf = \\\"".$mod_beef_msf."\\\";/g' ../_info_.php"; //change main settings
+    $exec = "/bin/sed -i 's/^\\\$mod_beef_msfenable.*/\\\$mod_beef_msfenable = \\\"".$mod_beef_msfenable."\\\";/g' ../_info_.php"; //change main settings
     $output = exec_fruitywifi($exec);
    // $exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
@@ -93,7 +93,7 @@ if ($type == "settings") {
     //$exec = "/bin/sed -i 's/ ../ $mod_beef_conf2 //change beef conf2
     
     //mod msfssl
-     $exec = "/bin/sed -i 's/^\\\$mod_beef_msfssl.*/\\\$mod_beef_msfssl = \\\"".$mod_beef_msfssl."\\\";/g' ../_info_.php"; //change main settings
+     $exec = "/bin/sed -i 's/^\\\$mod_beef_msfsslenable.*/\\\$mod_beef_msfsslenable = \\\"".$mod_beef_msfsslenable."\\\";/g' ../_info_.php"; //change main settings
      $output = exec_fruitywifi($exec);
 	
 	//$exec = "/bin/sed -i 's/ ../ $mod_beef_conf1 //change beef conf1
