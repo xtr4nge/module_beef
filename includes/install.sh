@@ -63,6 +63,7 @@ check_os () {
   fi
 }
 
+echo "checkedos"
 
 install_linux () {
 
@@ -94,7 +95,7 @@ install_linux () {
   info "Installing ${Distro} prerequisite packages..."
   if [ "${Distro}" = "Debian" ] || [ "${Distro}" = "Kali" ]; then
     sudo apt-get update
-    sudo apt-get install curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison nodejs ruby-dev libcurl4-openssl-dev
+    sudo apt-get install curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison nodejs ruby-dev libcurl4-openssl-dev -y
   elif [ "${Distro}" = "RedHat" ]; then
     sudo yum install -y git make gcc openssl-devel gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel bzip2 autoconf automake libtool bison sqlite-devel nodejs
   elif [ "${Distro}" = "Arch" ]; then
