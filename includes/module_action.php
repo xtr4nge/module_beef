@@ -90,7 +90,10 @@ if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
     exec_fruitywifi($exec);
-
+   
+     $exec = "chmod 755 installbeef";
+    exec_fruitywifi($exec);
+	
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
     exec_fruitywifi($exec);
     
