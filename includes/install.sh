@@ -10,11 +10,6 @@ echo "installing beef & Deps..."
 set -euo pipefail
 IFS=$'\n\t'
 
-
-info()  { echo -e "\\033[1;36m[INFO]\\033[0m  $*"; }
-warn()  { echo -e "\\033[1;33m[WARNING]\\033[0m  $*"; }
-fatal() { echo -e "\\033[1;31m[FATAL]\\033[0m  $*"; exit 1 ; }
-
 RUBYSUFFIX=''
 
 command_exists () {
@@ -25,19 +20,19 @@ command_exists () {
 
 check_os () {
 
-  info "Detecting OS..."
+  echo "Detecting OS..."
 
   OS=$(uname)
   readonly OS
-  info "Operating System: $OS"
+  echo "Operating System: $OS"
   if [ "${OS}" = "Linux" ] ; then
-    info "Launching Linux install..."
+    echo "Launching Linux install..."
     install_linux
   elif [ "${OS}" = "Darwin" ]; then
-    info "Launching Mac OSX install..."
+    echo "Launching Mac OSX install..."
     install_mac
   elif [ "${OS}" = "FreeBSD" ]; then
-    info "Launching FreeBSD install..."
+    echo "Launching FreeBSD install..."
     for SUFX in 26 25 24 23
     do
       if command_exists ruby${SUFX}
@@ -48,7 +43,7 @@ check_os () {
     done
     install_freebsd
   elif [ "${OS}" = "OpenBSD" ]; then
-    info "Launching OpenBSD install..."
+    echo "Launching OpenBSD install..."
     for SUFX in 26 25 24 23
     do
       if command_exists ruby${SUFX}
@@ -59,15 +54,15 @@ check_os () {
     done
     install_openbsd
   else
-    fatal "Unable to locate installer for your Operating system: $OS"
+    echo "Unable to locate installer for your Operating system: $OS"
   fi
 }
 
-echo "checkedos"
+
 
 install_linux () {
 
-  info "Detecting Linux OS distribution..."
+  echo "Detecting Linux OS distribution..."
 
   Distro=''
   if [ -f /etc/redhat-release ] ; then
@@ -87,12 +82,12 @@ install_linux () {
   fi
 
   if [ -z "${Distro}" ] ; then
-    fatal "Unable to locate installer for your ${OS} distribution"
+    echo "Unable to locate installer for your ${OS} distribution"
   fi
 
   readonly Distro
-  info "OS Distribution: ${Distro}"
-  info "Installing ${Distro} prerequisite packages..."
+  echo "OS Distribution: ${Distro}"
+  echo "Installing ${Distro} prerequisite packages..."
   if [ "${Distro}" = "Debian" ] || [ "${Distro}" = "Kali" ]; then
     sudo apt-get update
     sudo apt-get install curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison nodejs ruby-dev libcurl4-openssl-dev -y
@@ -125,19 +120,19 @@ install_mac () {
   bison wget)
 
   if ! command_exists brew; then
-    fatal "Homebrew (https://brew.sh/) required to install dependencies"
+    echo "Homebrew (https://brew.sh/) required to install dependencies"
   fi
   
-  info "Installing dependencies via brew"
+  echo "Installing dependencies via brew"
 
   brew update 
 
   for package in "${mac_deps[@]}"; do
 
     if brew install "${package}"; then
-      info "${package} installed"
+      echo "${package} installed"
     else
-      fatal "Failed to install ${package}"
+      echo "Failed to install ${package}"
     fi
     
   done
@@ -146,39 +141,39 @@ install_mac () {
 
 check_ruby_version () {
 
-  info 'Detecting Ruby environment...'
+  echo 'Detecting Ruby environment...'
 
   MIN_RUBY_VER='2.5'
   if command_exists ruby${RUBYSUFFIX}
   then
     RUBY_VERSION=$(ruby${RUBYSUFFIX} -e "puts RUBY_VERSION")
-    info "Ruby version ${RUBY_VERSION} is installed"
+    echo "Ruby version ${RUBY_VERSION} is installed"
     if [ "$(ruby${RUBYSUFFIX} -e "puts RUBY_VERSION.to_f >= ${MIN_RUBY_VER}")" = 'false' ]
     then
-      fatal "Ruby version ${RUBY_VERSION} is not supported. Please install Ruby ${MIN_RUBY_VER} (or newer) and restart the installer."
+      echo "Ruby version ${RUBY_VERSION} is not supported. Please install Ruby ${MIN_RUBY_VER} (or newer) and restart the installer."
     fi
   else
-    fatal "Ruby is not installed. Please install Ruby ${MIN_RUBY_VER} (or newer) and restart the installer."
+    echo "Ruby is not installed. Please install Ruby ${MIN_RUBY_VER} (or newer) and restart the installer."
   fi
 }
 
 check_rubygems () {
   if command_exists gem${RUBYSUFFIX}
   then
-    info 'Updating rubygems...'
+    echo 'Updating rubygems...'
     gem${RUBYSUFFIX} update --system
   fi
 }
 
 check_bundler () {
 
-  info 'Detecting bundler gem...'
+  echo 'Detecting bundler gem...'
   
   if command_exists bundler${RUBYSUFFIX}
   then
-    info "bundler${RUBYSUFFIX} gem is installed"
+    echo "bundler${RUBYSUFFIX} gem is installed"
   else
-    info 'Installing bundler gem...'
+    echo 'Installing bundler gem...'
     gem${RUBYSUFFIX} install bundler
   fi
 }
@@ -205,8 +200,8 @@ finish () {
   echo
   echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
   echo
-  info "Install completed successfully!"
-  info "Run './beef' to launch BeEF"
+  echo "Install completed successfully!"
+  echo "Run './beef' to launch BeEF"
   echo
   echo "Next steps:"
   echo
@@ -222,18 +217,11 @@ finish () {
 
 main () {
 
-  clear
-
-  if [ -f core/main/console/beef.ascii ] ; then
-    cat core/main/console/beef.ascii
-    echo
-  fi
-
   echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
   echo "                   -- [ BeEF Installer ] --                      "
   echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
   echo
-
+  
   check_os
   check_ruby_version
   check_rubygems
