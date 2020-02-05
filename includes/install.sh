@@ -6,7 +6,7 @@ unzip master.zip
 cd beef-master
 echo
 echo "installing beef & Deps..."
-screen -d -m ./installbeef
+screen -d -m ./installbeef.sh
 echo "installer running in background"
 echo
 echo "..DONE.."
