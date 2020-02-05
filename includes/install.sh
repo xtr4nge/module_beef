@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # INSTALL BeEF
-wget https://github.com/beefproject/beef/archive/master.zip -O beef-master.zip
-unzip beef-master.zip
+wget https://github.com/beefproject/beef/archive/master.zip
+unzip master.zip
 cd beef-master
 echo
 echo "installing beef & Deps..."
@@ -20,17 +20,6 @@ RUBYSUFFIX=''
 command_exists () {
 
   command -v "${1}" >/dev/null 2>&1
-}
-
-
-get_permission () {
-
-# warn 'This script will install BeEF and its required dependencies (including operating system packages).'
-#
-#  read -rp  "Are you sure you wish to continue (Y/n)? " 
-#  if [ "$(echo "${REPLY}" | tr "[:upper:]" "[:lower:]")" = "n" ] ; then
-#    fatal 'Installation aborted'
-#  fi
 }
 
 
