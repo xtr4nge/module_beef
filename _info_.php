@@ -2,7 +2,7 @@
 $mod_type="service";
 $mod_name="beef";
 $mod_alias="Beef";
-$mod_version="2.b";
+$mod_version="2.0";
 $mod_dep="beef";
 $mod_co="Mitmproxy";
 $mod_cotwo="Msfrpcd";
@@ -17,7 +17,7 @@ $mod_logs="$log_path/$mod_name.log";
 $mod_logs_history="$mod_path/includes/logs/";
 
 $mod_optpath="$mod_path/includes/beef/config.yaml";
-$mod_cooptpath="$mod_path/includes/beef/extension/metasploit/config.yaml";
+$mod_cooptpath="$mod_path/includes/beef/extensions/metasploit/config.yaml";
 
 # OPTIONS
 $mod_beef_kali="0";
@@ -26,10 +26,10 @@ $mod_beef_auto="0";
 # USER OPTIONS
 # BEEF
 $mod_user = "beef";
-$mod_passwd = "beef";
+$mod_passwd = "fruity";
 $mod_xhr_poll_timeout = "5000";
 $mod_hook_file = "hook.js";
-$mod_hook_session_name = "BEEF";
+$mod_hook_session_name = "beef";
 $mod_dns_hostname_lookup = "true";
 $mod_sslbeef = "false";
 $mod_sslcertpath = "";
@@ -40,7 +40,7 @@ $mod_metasploit = "false";
 $mod_msfhost = "127.0.0.1";
 $mod_msfport = "55553";
 $mod_msfuser = "msf";
-$mod_msfpasswd = "Hackme01!";
+$mod_msfpasswd = "fruity";
 
 $mod_msfsslenable = "false";
 $mod_msfsslversion = "TLS1";
