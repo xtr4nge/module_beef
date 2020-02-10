@@ -97,13 +97,13 @@ if ($type == "settings") {
         $exec = "/bin/sed -i 's/^\\\$mod_dns_hostname_lookup.*/\\\$mod_dns_hostname_lookup = \\\"true\\\";/g' ../_info_.php";
         $output = exec_fruitywifi($exec);   
         
-        $exec = "/bin/sed -i '112 s/dns_hostname_lookup:.*/dns_hostname_lookup: \\\"true\\\"/g' $mod_optpath";
+        $exec = "/bin/sed -i '112 s/dns_hostname_lookup:.*/dns_hostname_lookup: true/g' $mod_optpath";
         $output = exec_fruitywifi($exec);
     }else{
         $exec = "/bin/sed -i 's/^\\\$mod_dns_hostname_lookup.*/\\\$mod_dns_hostname_lookup = \\\"false\\\";/g' ../_info_.php";
         $output = exec_fruitywifi($exec);
         
-        $exec = "/bin/sed -i '112 s/dns_hostname_lookup:.*/dns_hostname_lookup: \\\"false\\\"/g' $mod_optpath";
+        $exec = "/bin/sed -i '112 s/dns_hostname_lookup:.*/dns_hostname_lookup: false/g' $mod_optpath";
         $output = exec_fruitywifi($exec);
     }
     
@@ -111,7 +111,7 @@ if ($type == "settings") {
         $exec = "/bin/sed -i 's/^\\\$mod_sslbeef.*/\\\$mod_sslbeef = \\\"true\\\";/g' ../_info_.php";
         $output = exec_fruitywifi($exec);  
         
-        $exec = "/bin/sed -i '89 s/enable:.*/enable: \\\"true\\\"/g' $mod_optpath";
+        $exec = "/bin/sed -i '89 s/enable:.*/enable: true/g' $mod_optpath";
         $output = exec_fruitywifi($exec);
         
         
@@ -146,6 +146,10 @@ if ($type == "settings") {
     }else{
         $exec = "/bin/sed -i 's/^\\\$mod_sslbeef.*/\\\$mod_sslbeef = \\\"false\\\";/g' ../_info_.php";
         $output = exec_fruitywifi($exec);
+
+	$exec = "/bin/sed -i '89 s/enable:.*/enable: false/g' $mod_optpath";
+        $output = exec_fruitywifi($exec);
+
     }
 
     if($mod_metasploit == "true"){
@@ -153,10 +157,10 @@ if ($type == "settings") {
         $exec = "/bin/sed -i 's/^\\\$mod_metasploit.*/\\\$mod_metasploit = \\\"true\\\";/g' ../_info_.php";
         $output = exec_fruitywifi($exec);
         
-        $exec = "/bin/sed -i '13 s/enable:.*/enable: \\\"true\\\"/g' $mod_optpath";
+        $exec = "/bin/sed -i '147 s/enable:.*/enable: true/g' $mod_optpath";
         $output = exec_fruitywifi($exec);
         
-        $exec = "/bin/sed -i '23 s/enable:.*/enable: \\\"true\\\"/g' $mod_cooptpath";
+        $exec = "/bin/sed -i '23 s/enable:.*/enable: true/g' $mod_cooptpath";
         $output = exec_fruitywifi($exec);
                 
         $exec = "/bin/sed -i 's/^\\\$mod_msfhost.*/\\\$mod_msfhost = \\\"".$mod_msfhost."\\\";/g' ../_info_.php";
@@ -187,13 +191,13 @@ if ($type == "settings") {
             $exec = "/bin/sed -i 's/^\\\$mod_msfsslenable.*/\\\$mod_msfsslenable =  \\\"true\\\";/g' ../_info_.php";
             $output = exec_fruitywifi($exec);
             
-            $exec = "/bin/sed -i '30 s/ssl:.*/ssl: \\\"true\\\"/g' $mod_cooptpath";
+            $exec = "/bin/sed -i '30 s/ssl:.*/ssl: true/g' $mod_cooptpath";
             $output = exec_fruitywifi($exec);
         }else{
             $exec = "/bin/sed -i 's/^\\\$mod_msfsslenable.*/\\\$mod_msfsslenable = \\\"false\\\";/g' ../_info_.php";
             $output = exec_fruitywifi($exec);
             
-            $exec = "/bin/sed -i '30 s/ssl:.*/ssl: \\\"".$mod_msfsslenable."\\\"/g' $mod_cooptpath";
+            $exec = "/bin/sed -i '30 s/ssl:.*/ssl: false/g' $mod_cooptpath";
             $output = exec_fruitywifi($exec);
         }
         
@@ -215,13 +219,13 @@ if ($type == "settings") {
             $exec = "/bin/sed -i 's/^\\\$mod_msfsslverify.*/\\\$mod_msfsslverify =  \\\"true\\\";/g' ../_info_.php";
             exec_fruitywifi($exec);
             
-            $exec = "/bin/sed -i '32 s/ssl_verify:.*/ssl_verify: \\\"true\\\"/g' $mod_cooptpath";
+            $exec = "/bin/sed -i '32 s/ssl_verify:.*/ssl_verify: true/g' $mod_cooptpath";
             $output = exec_fruitywifi($exec);
         }else{
             $exec = "/bin/sed -i 's/^\\\$mod_msfsslverify.*/\\\$mod_msfsslverify = \\\"false\\\";/g' ../_info_.php";
             exec_fruitywifi($exec); 
             
-            $exec = "/bin/sed -i '32 s/ssl_verify:.*/ssl_verify: \\\"false\\\"/g' $mod_cooptpath";
+            $exec = "/bin/sed -i '32 s/ssl_verify:.*/ssl_verify: false/g' $mod_cooptpath";
             $output = exec_fruitywifi($exec);
         }
     
@@ -258,8 +262,11 @@ if ($type == "settings") {
         
         $exec = "/bin/sed -i 's/^\\\$mod_metasploit.*/\\\$mod_metasploit = \\\"false\\\";/g' ../_info_.php";
         $output = exec_fruitywifi($exec);
+
+	$exec = "/bin/sed -i '147 s/enable:.*/enable: false/g' $mod_optpath";
+        $output = exec_fruitywifi($exec);
     
-        $exec = "/bin/sed -i '23 s/enable:.*/enable: \\\"false\\\"/g' $mod_cooptpath";
+        $exec = "/bin/sed -i '23 s/enable:.*/enable: false/g' $mod_cooptpath";
         $output = exec_fruitywifi($exec);
     }
 
