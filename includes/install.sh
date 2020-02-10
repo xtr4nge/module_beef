@@ -1,20 +1,59 @@
 #!/bin/bash
+# Copyright (c) 2006-2020 Wade Alcorn - wade@bindshell.net
+# Browser Exploitation Framework (BeEF) - http://beefproject.com
+# See the file 'doc/COPYING' for copying permission
+#
 
-# INSTALL BeEF
-wget https://github.com/beefproject/beef/archive/master.zip
-unzip master.zip
-cd beef-master
-echo
-echo "installing beef & Deps..."
-
-set -euo pipefail
 IFS=$'\n\t'
+GEOIP_PATH="/opt/GeoIP"
 
 RUBYSUFFIX=''
 
 command_exists () {
 
   command -v "${1}" >/dev/null 2>&1
+}
+
+check_geodeps() {
+  if ! command_exists /usr/bin/curl
+  then
+    echo "/usr/bin/curl is not installed"
+  fi
+  if ! command_exists /bin/gunzip
+  then
+    echo "/bin/gunzip is not installed"
+  fi
+  if ! command_exists /bin/tar
+  then
+    echo "/bin/tar is not installed"
+  fi
+}
+
+check_geoperms() {
+  /bin/mkdir -p "${GEOIP_PATH}"
+
+  if ! [ -w "${GEOIP_PATH}" ]
+  then
+    echo "${GEOIP_PATH} is not writable"
+  fi
+}
+
+installgeo() {
+  echo 'Downloading MaxMind GeoLite2-City database ...'
+  curl -O https://web.archive.org/web/20191227182209/https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz
+
+  echo 'Extracting GeoLite2-City.tar.gz ...'
+  /bin/gunzip GeoLite2-City.tar.gz
+  /bin/tar xvf GeoLite2-City.tar
+
+  echo "Installing to ${GEOIP_PATH} ..."
+  /bin/mv GeoLite2-City_*/* "${GEOIP_PATH}"
+
+  echo 'Cleaning up ...'
+  /bin/rm GeoLite2-City.tar
+  /bin/rmdir GeoLite2-City_*
+
+  echo 'Done!'
 }
 
 
@@ -59,7 +98,6 @@ check_os () {
 }
 
 
-
 install_linux () {
 
   echo "Detecting Linux OS distribution..."
@@ -90,7 +128,7 @@ install_linux () {
   echo "Installing ${Distro} prerequisite packages..."
   if [ "${Distro}" = "Debian" ] || [ "${Distro}" = "Kali" ]; then
     sudo apt-get update
-    sudo apt-get install curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison nodejs ruby-dev libcurl4-openssl-dev -y
+    sudo apt-get install curl git build-essential openssl libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison nodejs ruby-dev libcurl4-openssl-dev
   elif [ "${Distro}" = "RedHat" ]; then
     sudo yum install -y git make gcc openssl-devel gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel bzip2 autoconf automake libtool bison sqlite-devel nodejs
   elif [ "${Distro}" = "Arch" ]; then
@@ -214,22 +252,55 @@ finish () {
   echo
 }
 
+final(){
+  echo
+  echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+  echo
+  check_geodeps
+  check_geoperms
+  installgeo
+  echo "GEO INSTALLED"
+  echo
+  echo "Changing Beef PW to fruity"
+  echo
+  sed -i '29 s/$mod_passwd.*/$mod_passwd = \"fruity\";/g' /usr/share/fruitywifi/www/modules/beef/_info_.php
+  sed -i '21 s/passwd:.*/passwd: \"fruity\"/g' /usr/share/fruitywifi/www/modules/beef/includes/beef/config.yaml
+  echo
+  echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+  echo
+  echo "-------->DONT USE beef as User PW !<------------------------"
+  echo
+  echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+  echo
+  echo "-------->PW SET TO fruity<-----------------------------------"
+  echo
+  echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+  echo
+  echo "--------->DONE !<--------------------------------------------"
+  echo
+  echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
+  echo
+}
+
 
 main () {
-
   echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
   echo "                   -- [ BeEF Installer ] --                      "
   echo "#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#"
   echo
-  
+  echo "Getting Beef Git"
+  git clone https://github.com/beefproject/beef.git
+  echo
+  echo "Change dir"
+  echo
+  cd beef  
   check_os
   check_ruby_version
   check_rubygems
   check_bundler
   install_beef
   finish
+  final
 }
 
 main "$@"
-echo "..DONE.."
-exit
