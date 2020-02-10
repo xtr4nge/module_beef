@@ -20,7 +20,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>FruityWiFi : BeEF</title>
+<title>FruityWiFi : Beef</title>
 <script src="../js/jquery.js"></script>
 <script src="../js/jquery-ui.js"></script>
 
@@ -54,7 +54,7 @@ include "../../functions.php";
 
 // Checking POST & GET variables...
 if ($regex == 1) {
-    regex_standard($_POST["newdata"], "msg.php", $regex_extra);
+	regex_standard($_POST["newdata"], "msg.php", $regex_extra);
     regex_standard($_GET["logfile"], "msg.php", $regex_extra);
     regex_standard($_GET["action"], "msg.php", $regex_extra);
     regex_standard($_POST["service"], "msg.php", $regex_extra);
@@ -63,7 +63,6 @@ if ($regex == 1) {
 $newdata = $_POST['newdata'];
 $logfile = $_GET["logfile"];
 $action = $_GET["action"];
-$tempname = $_GET["tempname"];
 $service = $_POST["service"];
 
 // DELETE LOG
@@ -72,64 +71,56 @@ if ($logfile != "" and $action == "delete") {
     exec_fruitywifi($exec);
 }
 
-// SET MODE
-if ($_POST["change_mode"] == "1") {
-    $ss_mode = $service;
-    $exec = "/bin/sed -i 's/ss_mode.*/ss_mode = \\\"".$ss_mode."\\\";/g' _info_.php";
-    $output = exec_fruitywifi($exec);
-}
-
 ?>
 
 <div class="rounded-top" align="left"> &nbsp; <b><?=$mod_alias?></b> </div>
 <div class="rounded-bottom">
 
-    &nbsp;version <?=$mod_version?><br>
-    <?
-	if ($mod_beef_kali == "1") {
-		$check_beef = "/usr/bin/beef-xss";
-	} else {
-		$check_beef = "includes/beef-master/beef";
-	}
-    if (file_exists($check_beef)) { 
-        echo "&nbsp;&nbsp;&nbsp; $mod_alias <font style='color:lime'>installed</font><br>";
-    } else {
-	echo "&nbsp;&nbsp;&nbsp; $mod_alias <a href='includes/module_action.php?install=install_$mod_name' style='color:red'>install</a><br>";
-    } 
-    ?>
+    &nbsp;version <?=$mod_version?><br>  
     
     <?
-    $ismoduleup = exec("$mod_isup");
-    if ($ismoduleup != "") {
-        echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color='lime'><b>enabled</b></font>.&nbsp; | <a href='includes/module_action.php?service=beef&action=stop&page=module'><b>stop</b></a><br>";
+    if(file_exists($bin_beef)){
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $mod_alias  <font style='color:lime'>installed</font><br>";
+	   $ismoduleup = exec($mod_isup);
+        if ($ismoduleup != "") {
+        	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $mod_alias  <font color='lime'><b>enabled</b></font>.&nbsp; | <a href='includes/module_action.php?service=beef&action=stop&page=module'><b>stop</b></a><br>";
+        } else { 
+        	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $mod_alias  <font color='red'><b>disabled</b></font>. | <a href='includes/module_action.php?service=beef&action=start&page=module'><b>start</b></a><br>";
+    	}
+        
+        if(file_exists($bin_mitmdump)){
+        echo "&nbsp; $mod_co  <font style='color:lime'>installed</font><br>"; 
+	       $ismoduleup = exec($mod_coisup);
+    	   if ($ismoduleup != "") {
+                echo "&nbsp;&nbsp; AutoHook <font color='lime'><b>enabled</b></font>.&nbsp; | <a href='includes/module_action.php?service=beef&action=hookstop&page=module'><b>stop</b></a><br>";
+    	   } else { 
+        	   echo "&nbsp;&nbsp; AutoHook <font color='red'><b>disabled</b></font>. | <a href='includes/module_action.php?service=beef&action=hookstart&page=module'><b>start</b></a><br>";
+    	           }
+            } else { 
+                echo "&nbsp; $mod_co  <a href='/page_modules.php?show' style='color:red'>install</a><br>";
+            }
+        
+        if(file_exists($bin_msfrpcd)){
+        echo "&nbsp;&nbsp;&nbsp; $mod_cotwo  <font style='color:lime'>installed</font><br>";
+	       $ismoduleup = exec($mod_cotwoisup);
+    	   if ($ismoduleup != "") {
+        	   echo "&nbsp;&nbsp;&nbsp; $mod_cotwo  <font color='lime'><b>enabled</b></font>.&nbsp; | <a href='includes/module_action.php?service=msfrpcd&action=stop&page=module'><b>stop</b></a><br>";
+    	   } else { 
+        	   echo "&nbsp;&nbsp;&nbsp; $mod_cotwo  <font color='red'><b>disabled</b></font>. | <a href='includes/module_action.php?service=msfrpcd&action=start&page=module'><b>start</b></a><br>";
+    	           }
+            } else { 
+                echo "&nbsp;&nbsp;&nbsp; $mod_cotwo  <a href='/page_modules.php?show' style='color:red'>install</a><br>";
+            }
+        
+        $ismoduleup = exec($mod_isup);
+    	if ($ismoduleup != "") {
+        	echo "&nbsp;&nbsp;&nbsp; UI <a href='http://".$_SERVER['SERVER_ADDR'].":3000/ui/panel' target='_blank'>Panel Login</a>";
+	   } 
     } else { 
-        echo "&nbsp;&nbsp;&nbsp; $mod_alias  <font color='red'><b>disabled</b></font>. | <a href='includes/module_action.php?service=beef&action=start&page=module'><b>start</b></a><br>";
-    }
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $mod_alias  <a href='includes/module_action.php?install=install_$mod_name' style='color:red'>install</a><br>";
+    }    
     ?>
-
-    <?
-    $ismoduleup = exec("$mod_msfbacktask");
-    if ($ismoduleup != "") {
-        echo "&nbsp; msfrpc  <font color='lime'><b>enabled</b></font><br>";
-    } else { 
-        echo "&nbsp; msfrpc  <font color='red'><b>disabled</b></font><br>";
-    }
-    ?>
-	
-    <?
-    $ismoduleup = exec("ps aux|grep -E 'mitmdump.+inject_beef' | grep -v grep");
-    if ($ismoduleup != "") {
-        echo "AutoHook <font color='lime'><b>enabled</b></font>.<br>";
-    } else { 
-        echo "AutoHook <font color='red'><b>disabled</b></font>.<br>";
-    }
-    ?>
-	
-	<?
-        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI <a href='http://".$_SERVER['SERVER_ADDR'].":3000/ui/panel' target='_blank'>Panel Login</a>";
-    ?>
-	
-	
+    
 </div>
 
 <br>
@@ -142,14 +133,122 @@ if ($_POST["change_mode"] == "1") {
 
     <div id="result" class="module">
         <ul>
-             <li><a href="#tab-output">Output</a></li>
-             <li><a href="#tab-history">History</a></li>
-	         <li><a href="#tab-options">Options</a></li>
-	         <li><a href="#tab-useroptions">User Options</a></li>
-             <li><a href="#tab-about">About</a></li>
+            <li><a href="#tab-config">Config</a></li>
+            <li><a href="#tab-output">Output</a></li>
+            <li><a href="#tab-history">History</a></li>
+            <li><a href="#tab-about">About</a></li>
         </ul>
-	<!-- OUTPUT -->
+        
+    <!-- CONFIG -->
+
+        <div id="tab-config" class="history">
+        <form method="POST" autocomplete="off" action="includes/save.php">
+        <div class="module-options">
+		<h4>Config</h4>
+		<p>Beef Settings</p>
+         <table>
+            <tr>
+                <td>Beef User: </td>
+                <td><input name="mod_user" type="text" value="<?=$mod_user?>"></td>
+            </tr>
+            <tr>
+                <td>Beef Passwd: </td>
+                <td><input name="mod_passwd" type="text" required value="<?=$mod_passwd?>"></td>
+            </tr>
+            <tr>
+                <td>Beef Xhr poll timeout: </td>
+                <td><input name="mod_xhr_poll_timeout" type="number" value="<?=$mod_xhr_poll_timeout?>"></td>
+            </tr>
+            <tr>
+                <td>Beef Hook file: </td>
+                <td><input name="mod_hook_file" type="text" value="<?=$mod_hook_file?>"></td>
+            </tr>
+            <tr>
+                <td>Beef Hook Session Name: </td>
+                <td><input name="mod_hook_session_name" type="text" value="<?=$mod_hook_session_name?>"></td>
+            </tr>
+            <tr>
+                <td>Beef Dns Hostname Lookup: </td>
+                <td><input name="mod_dns_hostname_lookup" type="checkbox" value="true" <?php if ($mod_dns_hostname_lookup == "true"){?> checked="checked" <?php } ?>></td>
+            </tr>
+            <tr>
+                <td>Beef SSl: </td>
+                <td><input name="mod_sslbeef" type="checkbox" value="true" <?php if ($mod_sslbeef == "true"){?> checked="checked" <?php } ?>></td>
+            </tr>
+            <tr>
+                <td>Beef SSl Cert Path: </td>
+                <td><input name="mod_sslcertpath" type="text" value="<?=$mod_sslcertpath?>"></td>
+            </tr>
+            <tr>
+                <td>Beef SSl Privkey Path: </td>
+                <td><input name="mod_sslkeypath" type="text" value="<?=$mod_sslkeypath?>"></td>
+            </tr>
+            <tr>
+                <td>Beef Metasploit: </td>
+                <td><input name="mod_metasploit" type="checkbox" value="true" <?php if ($mod_metasploit == "true"){?> checked="checked" <?php } ?>></td>                
+            </tr>
+            </table>
+            <table>
+            <td><p>Msfrpcd Settings<p></td>
+            <br>
+	    <tr>
+                <td>Msfrpcd Host: </td>
+                <td><input name="mod_msfhost" type="text" value="<?=$mod_msfhost?>"></td>
+            </tr>
+	    <tr>
+                <td>Msfrpcd Port: </td>
+                <td><input name="mod_msfport" type="number" value="<?=$mod_msfport?>"></td>
+            </tr>
+	    <tr>
+                <td>Msfrpcd User: </td>
+                <td><input name="mod_msfuser" type="text" value="<?=$mod_msfuser?>"></td>
+            </tr>
+	    <tr>
+                <td>Msfrpcd Passwd: </td>
+                <td><input name="mod_msfpasswd" type="text" value="<?=$mod_msfpasswd?>"></td>
+            </tr>
+            <tr>
+                <td>Msfrpcd SSl: </td>
+                <td><input name="mod_msfsslenable" type="checkbox" value="true" <?php if ($mod_msfsslenable == "true"){?> checked="checked" <?php } ?>></td>                
+
+            </tr>
+            <tr>
+                <td>Msfrpcd SSl Version: </td>
+                <td><input name="mod_msfsslversion" type="text" value="<?=$mod_msfsslversion?>"></td>                
+
+            </tr>
+            <tr>
+                <td>Msfrpcd SSl Verify: </td>
+                <td><input name="mod_msfsslverify" type="checkbox" value="true" <?php if ($mod_msfsslverify == "true"){?> checked="checked" <?php } ?>></td>                
+
+            </tr>
+            <tr>
+                <td>Msfrpcd Callback Host: </td>
+                <td><input name="mod_msfcallback_host" type="text" value="<?=$mod_msfcallback_host?>"></td>                
+
+            </tr>
+            <tr>
+                <td>Msfrpcd Autopwn Url: </td>
+                <td><input name="mod_msfautopwn_url" type="text" value="<?=$mod_msfautopwn_url?>"></td>
+            </tr>
+            <tr>
+            <td></td>
+                <td>
+                    <input type="submit" value="save">
+                    <input name="type" type="hidden" value="settings">
+                </td>
+            </tr>
+         </table>
+		</div> 
+	    </form>
+        </div>
+        
+        <!-- END CONFIG -->
+        
+	    <!-- OUTPUT -->
+
         <div id="tab-output">
+			
 			<div>
 				<form id="formLogs-Refresh" name="formLogs-Refresh" method="POST" autocomplete="off" action="index.php">
 					<input type="submit" value="refresh">
@@ -171,8 +270,11 @@ if ($_POST["change_mode"] == "1") {
 					<textarea id="output" class="module-content" style="font-family: courier;"><?=htmlspecialchars($data)?></textarea>
 					<input type="hidden" name="type" value="logs">
 				</form>
+		
 			</div>
-        </div>	
+            
+        </div>
+	
 		<!-- HISTORY -->
 
         <div id="tab-history" class="history">
@@ -195,98 +297,16 @@ if ($_POST["change_mode"] == "1") {
         </div>
 
 		<!-- END HISTORY -->
-		
-		<!-- OPTIONS -->
-
-        <div id="tab-options" class="history">
-			<h5>
-			<input id="beef_kali" type="checkbox" name="my-checkbox" <? if ($mod_beef_kali == "1") echo "checked"; ?> onclick="setCheckbox(this, 'mod_beef_kali')" >
-            Kali-Linux | NetHunter
-			<br><br>
-			<input id="beef_auto" type="checkbox" name="my-checkbox" <? if ($mod_beef_auto == "1") echo "checked"; ?> onclick="setCheckbox(this, 'mod_beef_auto')" >
-            AutoHook (start mitmproxy to inject hook.js)
-			</h5>
-		</div>
-	
-		<!-- END OPTIONS --> 
-	      
-	      <!-- USER OPTIONS -->
-	    
-	  <div id="tab-useroptions" class="history">
-			<h5>
-			<form method="POST" autocomplete="off" action="includes/save.php">
-                    <table>
-                        <tr>
-                            <td>Beef Conf 1: </td>
-                            <td><input name="mod_beef_conf1" value="<?=$mod_beef_conf1?>"></td>
-                        </tr>
-			 	         <tr>
-                            <td>Beef Conf 2: </td>
-                            <td><input name="mod_beef_conf2" value="<?=$mod_beef_conf2?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msflink: </td>
-                            <td><input name="mod_beef_msf" value="<?=$mod_beef_msf?>"></td>
-                        </tr> 
-			             <tr>
-                            <td>Msfhost: </td>
-                            <td><input name="mod_beef_msfhost" value="<?=$mod_beef_msfhost?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msfport: </td>
-                            <td><input name="mod_beef_msfport" value="<?=$mod_beef_msfport?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msfusert: </td>
-                            <td><input name="mod_beef_msfuser" value="<?=$mod_beef_msfuser?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msfrpcpass: </td>
-                            <td><input name="mod_beef_msfpass" value="<?=$mod_beef_msfpass?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msfrpcssl: </td>
-                            <td><input name="mod_beef_msfssl" value="<?=$mod_beef_msfssl?>"></td>
-                        </tr>
-                        <tr>
-                            <td>Msfrpcssltype: </td>
-                            <td><input name="mod_beef_msfssltype" value="<?=$mod_beef_msfssltype?>"></td>
-                        </tr>
-                        <tr>
-                            <td>Msfrpcsslverify: </td>
-                            <td><input name="mod_beef_msfsslverify" value="<?=$mod_beef_msfsslverify?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msfautopwnurl: </td>
-                            <td><input name="mod_beef_msfautopwnurl" value="<?=$mod_beef_msfautopwnurl?>"></td>
-                        </tr>
-			             <tr>
-                            <td>Msfcallbackhost: </td>
-                            <td><input name="mod_beef_msfcallbackhost" value="<?=$mod_beef_msfcallbackhost?>"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <br>
-                                <input type="submit" value="save">
-                                <input name="type" type="hidden" value="settings">
-                            </td>
-                        </tr>
-                    </table> 
-	          </form>
-	      </h5>
-	</div>
-
-	     <!-- END USER OPTIONS -->
-
-		<!-- ABOUT -->
+        
+        <!-- ABOUT -->
 
         <div id="tab-about" class="history">
-		    <? include "includes/about.php"; ?>
-		</div>
-	
-		<!-- END ABOUT -->
+            <? include "includes/about.php"; ?>
+        </div>
         
+        <!-- END ABOUT -->
+		
+				        
     </div>
 
     <div id="loading" class="ui-widget" style="width:100%;background-color:#000; padding-top:4px; padding-bottom:4px;color:#FFF">
@@ -310,15 +330,11 @@ if ($_POST["change_mode"] == "1") {
         echo "</script>";
     } else if ($_GET["tab"] == 3) {
         echo "<script>";
-        echo "$( '#result' ).tabs({ active: 3 });";
+        echo "$( '#result' ).tabs({ active: 2 });";
         echo "</script>";
     } else if ($_GET["tab"] == 4) {
         echo "<script>";
-        echo "$( '#result' ).tabs({ active: 4 });";
-        echo "</script>";
-    } else if ($_GET["tab"] == 5) {
-        echo "<script>";
-        echo "$( '#result' ).tabs({ active: 5 });";
+        echo "$( '#result' ).tabs({ active: 3 });";
         echo "</script>";
     } 
     ?>
